@@ -30,6 +30,9 @@ class handDetector():
                     self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
         return img
     def findPosition(self, img, handNo=0, draw=True):
+        xList=[]
+        yList = []
+        bbox = []
         self.lmList = []
         if self.results.multi_hand_landmarks:
             myHand = self.results.multi_hand_landmarks[handNo]
@@ -37,12 +40,21 @@ class handDetector():
                 # print(id, lm)
                 h, w, c = img.shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
+                xList.append(cx)
+                yList.append(cy)
                 # print(id, cx, cy)
                 self.lmList.append([id, cx, cy])
                 # if id == 0:
                 if draw:
                     cv.circle(img, (cx, cy), 10, (0, 0, 255), cv.FILLED)
-        return self.lmList
+
+            xmin, xmax = min(xList), max(xList)
+            ymin, ymax = min(yList), max(yList)
+            bbox = xmin, ymin, xmax, ymax
+            if draw:
+                cv.rectangle(img, (xmin-20, ymin-20), (xmax+20, ymax+20), (0, 255, 0), 2)
+
+        return self.lmList, bbox
 
     def fingersUp(self):
         fingers = []
