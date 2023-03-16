@@ -98,7 +98,6 @@ while True:
 
     cv.imshow('image', img)
     # cv.imshow('imageC', imgCanvas)
-    # cv.imshow('Inv', imgInv)
     if cv.waitKey(10) & 0xFF==ord('q'):
             break
     cv.waitKey(1)
