@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import time
 import os
-import HandTractingModel as htm
+import HandTrackingModel as htm
 
 brushTickness = 15
 eraserTickness = 50
