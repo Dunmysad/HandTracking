@@ -31,7 +31,7 @@ xp, yp = 0, 0
 imgCanvas = np.zeros((720, 1280, 3), dtype='uint8')
 while True:
     success, img = cap.read()
-    # img = cv.flip(img, 1)
+    img = cv.flip(img, 1)
     img = detector.findHands(img)
     lmList = detector.findPosition(img, draw=False)
     if len(lmList) != 0:
